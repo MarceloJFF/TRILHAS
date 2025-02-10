@@ -16,7 +16,8 @@ function questao3() {
     console.log("Chamando função número 3...");
     let preco = 50;
     let desconto = 0.2;
-    console.log(`Preco com desconto = ${(1 - desconto) * preco}`);
+    let precoComDesconto = (1 - desconto) * preco
+    console.log(`Preco com desconto = ${precoComDesconto}`);
 }
 
 function questao4() {
@@ -99,6 +100,7 @@ function questao15() {
     console.log("Chamando função número 15...");
     let numero1 = 10;
     let numero2 = 20;
+
     function somar(numero1, numero2) {
         return numero1 + numero2;
     }
@@ -107,18 +109,3 @@ function questao15() {
 }
 
 
-questao1();
-questao2();
-questao3();
-questao4();
-questao5();
-questao6();
-questao7();
-questao8();
-questao9();
-questao10();
-questao11();
-questao12();
-console.log("Área do círculo com raio 5: " + questao13(5));
-questao14(3, 4);
-questao15();
