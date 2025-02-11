@@ -109,3 +109,4 @@ function questao15() {
 }
 
 
+questao15();
