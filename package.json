@@ -2,7 +2,7 @@
   "name": "trilhas-",
   "version": "1.0.0",
   "description": "Desafio 1 Trilhas",
-  "main": "index.js",
+  "main": "DESAFIO_1_TRILHAS.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
