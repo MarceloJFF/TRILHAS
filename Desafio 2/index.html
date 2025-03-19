@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Step Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+
+
+    <style>
+        .indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: lightgray;
+        }
+
+        body{
+            background: linear-gradient(to right, #895BC4, #2135A6);
+            
+        }
+        input{
+            border-radius: 20;
+        }
+        .indicator.active {
+            background-color: orange;
+        }
+    </style>
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentStep = 1;
+            const steps = document.querySelectorAll(".step");
+            const indicators = document.querySelectorAll(".indicator");
+
+            function showStep(step) {
+                steps.forEach((s, index) => {
+                    s.classList.toggle("d-none", index + 1 !== step);
+                });
+                indicators.forEach((i, index) => {
+                    i.classList.toggle("active", index + 1 === step);
+                });
+            }
+
+            document.querySelectorAll(".next").forEach(button => {
+                button.addEventListener("click", function () {
+                    if (currentStep < steps.length) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                });
+            });
+
+            document.querySelectorAll(".prev").forEach(button => {
+                button.addEventListener("click", function () {
+                    if (currentStep > 1) {
+                        currentStep--;
+                        showStep(currentStep);
+                    }
+                });
+            });
+
+            showStep(currentStep);
+        });
+    </script>
+</head>
+
+<body class="d-flex justify-content-center align-items-center vh-100">
+    <div class="bg-white p-4 rounded shadow w-100" style="max-width: 1000px; max-heigth: 1000px">
+        <div class="d-flex justify-content-center mb-3">
+            <div class="indicator me-2"></div>
+            <div class="indicator me-2"></div>
+            <div class="indicator me-2"></div>
+            <div class="indicator"></div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="step container">
+            <h4 >Dados do Usuário</h4>
+            <input type="text" placeholder="Nome Completo" class="form-control mb-2">
+            <div class="row">
+                <div class="col-6 ">
+                    <input type="text" placeholder="CPF ou RG" class="form-control mb-2">
+                </div>
+                <div class="col-6 ">
+                    <input type="text" placeholder="Telefone" class="form-control mb-2">
+                </div>
+            </div>
+
+            <div class="row justify-content-between">
+                <div class="col-2">
+                    <h4>Sexo</h4>
+                    <div class="">
+                        <span> M </span>
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                        <span> F </span>
+                        <input type="checkbox" aria-label="Checkbox for following text input">  
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <h4>Nascimento</h4>
+                    <input type="date"  class="form-control">
+                </div>
+
+                <div class="col-2">
+                    <h4>Cep</h4>
+                    <input type="text"  class="form-control">
+                </div>
+
+                <div class="col-1">
+                    <h4>UF</h4>
+                    <input type="text"  class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 ">
+                <h4>Cidade</h4>
+                    <input type="text"  class="form-control mb-2">
+                </div>
+                <div class="col-6 ">
+                    <h4>Logradouro</h4>
+                    <input type="text"  class="form-control mb-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 ">
+                <h4>Bairro</h4>
+                    <input type="text"  class="form-control mb-2">
+                </div>
+                <div class="col-6 ">
+                    <h4>Email</h4>
+                    <input type="email"  class="form-control mb-2">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 ">
+                <h4>Senha</h4>
+                    <input type="password"  class="form-control mb-2">
+                </div>
+                <div class="col-6 ">
+                    <h4>Confirmação de Senha</h4>
+                    <input type="password"  class="form-control mb-2">
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button class="prev btn btn-danger d-none">Voltar</button>
+                <button class="next btn btn-primary">Próximo</button>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step d-none">
+            <h2 class="h5 mb-3">Dados Adicionais</h2>
+            <input type="text" placeholder="Escolaridade" class="form-control mb-2">
+            <input type="text" placeholder="Formação" class="form-control mb-2">
+            <input type="text" placeholder="Nome da Instituição" class="form-control mb-2">
+            <div class="d-flex justify-content-between">
+                <button class="prev btn btn-danger">Voltar</button>
+                <button class="next btn btn-primary">Próximo</button>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step d-none">
+            <h2 class="h5 mb-3">Declarações</h2>
+            <p>Faça um breve resumo sobre sua experiência com tecnologia e nos informe por que você deveria ser
+                selecionado para o programa.</p>
+            <textarea class="form-control mb-2" rows="3"></textarea>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="terms">
+                <label class="form-check-label" for="terms">Declaro que li e concordo com os <a href="#">Termos e
+                        Condições</a> e a <a href="#">Política de Privacidade</a>.</label>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button class="prev btn btn-danger">Voltar</button>
+                <button class="next btn btn-primary">Próximo</button>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step d-none">
+            <h2 class="h5 mb-3">Anexe os Documentos</h2>
+            <input type="file" class="form-control mb-2" accept="application/pdf">
+            <input type="file" class="form-control mb-2" accept="application/pdf">
+            <input type="file" class="form-control mb-2" accept="application/pdf">
+            <div class="d-flex justify-content-between">
+                <button class="prev btn btn-danger">Voltar</button>
+                <button class="btn btn-success">Enviar</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
