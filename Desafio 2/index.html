@@ -37,9 +37,33 @@
     </style>
     <script defer>
         document.addEventListener("DOMContentLoaded", function () {
+
             let currentStep = 1;
             const steps = document.querySelectorAll(".step");
             const indicators = document.querySelectorAll(".indicator");
+
+                        
+            function validarRadio(name) {
+                const radios = document.querySelectorAll(`input[name="${name}"]`);
+                const feedback = document.querySelector(`#feedback-${name}`);
+                let selecionado = false;
+
+                radios.forEach(radio => {
+                    if (radio.checked) {
+                        selecionado = true;
+                    }
+                });
+
+                if (!selecionado) {
+                    radios.forEach(radio => radio.classList.add("is-invalid"));
+                    if (feedback) feedback.textContent = "Escolha uma opção.";
+                    return false;
+                } else {
+                    radios.forEach(radio => radio.classList.remove("is-invalid"));
+                    if (feedback) feedback.textContent = "";
+                    return true;
+                }
+            }
 
             function showStep(step) {
                 steps.forEach((s, index) => {
@@ -51,13 +75,128 @@
             }
 
             document.querySelectorAll(".next").forEach(button => {
-                button.addEventListener("click", function () {
-                    if (currentStep < steps.length) {
+                button.addEventListener("click", function (event) {
+                    if(button.classList.contains("form-full")){
+                        window.alert("Formulário enviado com sucesso!");
+                    }
+                    event.preventDefault();
+            if (!ValidadeAllInputsFromStep(currentStep, event.currentTarget)) {
+                return; // Se houver erro, interrompe o avanço
+            }
+            if (currentStep < steps.length) {
                         currentStep++;
                         showStep(currentStep);
                     }
                 });
             });
+
+            function validacaoInputsVazio(input, feedback, isValid) {
+                        //validação geral
+                        if (input.value.trim() == "") {
+                            input.classList.add("is-invalid");
+                            input.classList.remove("is-valid");
+                            if (feedback) feedback.textContent = "Este campo é obrigatório.";
+                            isValid = false;
+                        } else {
+                            input.classList.remove("is-invalid");
+                            input.classList.add("is-valid");
+                        }
+                        return isValid;
+            }
+            let ValidadeAllInputsFromStep = (currentStep, btn) => {
+                if (btn.classList.contains("step1")) {
+                    const inputs = document.querySelectorAll(".step-1-cpf,.step-1-nome,.step-1-telefone, .step-1-nascimento, .step-1-cep, .step-1-uf, .step-1-cidade, .step-1-bairro, .step-1-email, .step-1-password, .step-1-confirm-password");
+                    
+                    let isValid = true;
+                    console.log(inputs)
+                    inputs.forEach(input => {
+                        const feedback = input.nextElementSibling; // Pega a div de feedback logo após o input
+                        isValid = validacaoInputsVazio(input,feedback,isValid);
+                        isValid = validarRadio("sexo") && isValid;
+
+                        //validações especificas
+                        if (input.classList.contains("step-1-cpf")) {
+                            const cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
+                            if (!cpfRegex.test(input.value) ) {
+                                input.classList.add("is-invalid");
+                                input.classList.remove("is-valid");
+                                if (feedback) feedback.textContent = "CPF inválido. Digite um CPF válido.";
+                                isValid = false;
+                            } else {
+                                input.classList.remove("is-invalid");
+                                input.classList.add("is-valid");
+                                if (feedback) feedback.textContent = "";
+                            }
+                        }
+
+                        if (input.classList.contains("step-1-email")) {
+                            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                            
+                            if (!emailRegex.test(input.value)) {
+                                input.classList.add("is-invalid");
+                                input.classList.remove("is-valid");
+                                if (feedback) feedback.textContent = "E-mail inválido. Digite um e-mail válido.";
+                                isValid = false;
+                            } else {
+                                input.classList.remove("is-invalid");
+                                input.classList.add("is-valid");
+                                if (feedback) feedback.textContent = "";
+                            }
+                        }
+
+                        // Seleciona os inputs
+                        const senhaInput = document.querySelector(".step-1-password");
+                        const confirmSenhaInput = document.querySelector(".step-1-confirm-password");
+
+                        if (input.classList.contains("step-1-telefone")) {
+                            const telefoneRegex = /^\(?\d{2}\)?[\s-]?\d{4,5}-?\d{4}$/;
+
+                            if (!telefoneRegex.test(input.value)) {
+                                input.classList.add("is-invalid");
+                                input.classList.remove("is-valid");
+                                if (feedback) feedback.textContent = "Número de telefone inválido. Digite DD+9XXXXXXXX";
+                                isValid = false;
+                            } else {
+                                input.classList.remove("is-invalid");
+                                input.classList.add("is-valid");
+                                if (feedback) feedback.textContent = "";
+                            }
+                        }
+
+                        if (input.classList.contains("step-1-confirm-password")) {
+                            if (senhaInput.value !== confirmSenhaInput.value) {
+                                input.classList.add("is-invalid");
+                                input.classList.remove("is-valid");
+                                if (feedback) feedback.textContent = "As senhas não coincidem.";
+                                isValid = false;
+                            } else if(confirmSenhaInput.value != ""){ 
+                                input.classList.remove("is-invalid");
+                                input.classList.add("is-valid");
+                                if (feedback) feedback.textContent = "";
+                            }
+                        }
+
+
+                    });
+
+                    return isValid;
+                }
+                else if(btn.classList.contains("step2")){
+                    const inputs = document.querySelectorAll(".step-2-instituicao, .form-select");
+                    let isValid = true;
+                    isValid = validarRadio("tipoInstituicao") && isValid;
+                    isValid = validarRadio("disponibilidade") && isValid;
+                    isValid = validarRadio("area") && isValid;
+                    inputs.forEach((input)=>{
+                        const feedback = input.nextElementSibling; // Pega a div de feedback logo após o input
+                        isValid = validacaoInputsVazio(input,feedback,isValid);
+
+                    })
+                    
+                    console.log(inputs)
+                }
+            }
+
 
             document.querySelectorAll(".prev").forEach(button => {
                 button.addEventListener("click", function () {
@@ -67,6 +206,9 @@
                     }
                 });
             });
+            document.querySelector(".form-full").addEventListener("click", function (event) {
+                alert("Formulário enviado com sucesso! (Remova preventDefault depois)");
+            });
 
             showStep(currentStep);
         });
@@ -74,7 +216,7 @@
 </head>
 
 <body class="d-flex justify-content-center align-items-center vh-100">
-    <div class="bg-white p-4 rounded shadow" style="min-width: 1000px; min-heigth: 1000px">
+    <div class="bg-white p-4 rounded shadow container-sm" >
         <div class="d-flex justify-content-center mb-3">
             <div class="indicator me-2"></div>
             <div class="indicator me-2"></div>
@@ -83,15 +225,22 @@
         </div>
 
         <!-- Step 1 -->
-        <div class="step container">
-            <h4>Dados do Usuário</h4>
-            <input type="text" placeholder="Nome Completo" class="form-control mb-2">
+        <form action="" method="post" >
+        
+            <div class="step container">
+            <input type="text" placeholder="Nome Completo" class="form-control mb-2 step-1-nome" required>
+            <div class="feedback"></div>
             <div class="row">
                 <div class="col-6 ">
-                    <input type="text" placeholder="CPF ou RG" class="form-control mt-3">
+                    <input type="text" placeholder="CPF" class="form-control mt-3 step-1-cpf" required>
+                    <div class="feedback"></div>
+
+                 
                 </div>
                 <div class="col-6 ">
-                    <input type="text" placeholder="Telefone" class="form-control mt-3">
+                    <input type="text" placeholder="Telefone" class="form-control mt-3 step-1-telefone" pattern="\(\d{2}\) \d{5}-\d{4}" title="Formato: (XX) XXXXX-XXXX" required>
+                    <div class="feedback"></div>
+
                 </div>
             </div>
 
@@ -99,32 +248,44 @@
                 <div class="col-2">
                     <h4>Sexo</h4>
                     <div class="">
-                        <span> M </span>
-                        <input type="checkbox" class="form-check-input" aria-label="Checkbox for following text input">
-                        <span> F </span>
-                        <input type="checkbox" class="form-check-input" aria-label="Checkbox for following text input">
+                        <label for="sexoM">
+                            <span> M </span>
+                            <input type="radio" id="sexoM" name="sexo" class="form-check-input" aria-label="Sexo Masculino" required>
+                        </label>
+                        <label for="sexoF">
+                            <span> F </span>
+                            <input type="radio" id="sexoF" name="sexo" class="form-check-input" aria-label="Sexo Feminino" required>
+                        </label>
+
+                        <div id="feedback-sexo" class="text-danger"></div>
+
+                        
                     </div>
                 </div>
 
                 <div class="col-2">
                     <h4>Nascimento</h4>
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control step-1-nascimento" required>
+                    <div class="feedback"></div>
                 </div>
 
                 <div class="col-2">
                     <h4>Cep</h4>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control step-1-cep" required>
+                    <div class="feedback"></div>
                 </div>
 
                 <div class="col-1">
                     <h4>UF</h4>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control step-1-uf" required>
+                    <div class="feedback"></div>
                 </div>
             </div>
             <div class="row  mt-4">
                 <div class="col-6 ">
                     <h4>Cidade</h4>
-                    <input type="text" class="form-control mb-2">
+                    <input type="text" class="form-control mb-2 step-1-cidade" required>
+                    <div class="feedback"></div>
                 </div>
                 <div class="col-6 ">
                     <h4>Logradouro</h4>
@@ -134,27 +295,31 @@
             <div class="row  mt-4">
                 <div class="col-6 ">
                     <h4>Bairro</h4>
-                    <input type="text" class="form-control mb-2">
+                    <input type="text" class="form-control mb-2 step-1-bairro" required>
+                    <div class="feedback"></div>
                 </div>
                 <div class="col-6 ">
                     <h4>Email</h4>
-                    <input type="email" class="form-control mb-2">
+                    <input type="email" class="form-control mb-2 step-1-email" required>
+                    <div class="feedback"></div>
                 </div>
             </div>
 
             <div class="row  mt-4">
                 <div class="col-6 ">
                     <h4>Senha</h4>
-                    <input type="password" class="form-control mb-2">
+                    <input type="password" class="form-control mb-2 step-1-password" required>
+                    <div class="feedback"></div>
                 </div>
                 <div class="col-6 ">
                     <h4>Confirmação de Senha</h4>
-                    <input type="password" class="form-control mb-2">
+                    <input type="password" class="form-control mb-2 step-1-confirm-password" required>
+                    <div class="feedback"></div>
                 </div>
             </div>
             <div class="d-flex justify-content-between mt-4">
-                <button class="prev btn btn-danger d-none p-3">Voltar</button>
-                <button class="next btn btn-primary p-3">Próximo</button>
+                <button type="button" class="prev btn btn-danger d-none p-3">Voltar</button>
+                <button type="button" class="next btn btn-primary p-3 step1">Próximo</button>
             </div>
         </div>
 
@@ -164,18 +329,21 @@
             <div class="row">
                 <div class="col-6">
                     <div>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Selecione a Escolaridade</option>
-                            <option value="1">Ensino Médio Completo</option>
-                            <option value="2">Ensino Médio Incompleto</option>
-                            <option value="3">Ensino Superior Incompleto</option>
-                            <option value="4">Ensino Fundamental Completo</option>
+                        <select class="form-select" aria-label="Default select example" required>
+                            <option selected value="">Selecione a Escolaridade</option>
+                            <option value="1">Ensino Fundamental Completo</option>
+                            <option value="2">Ensino Medio Cursando</option>
+                            <option value="3">Ensino Medio Completo</option>
+                            <option value="4">Ensino Superior Cursando</option>
+                            <option value="5">Ensino Superior Completo</option>
                         </select>
-                    </div>
+                        <div class="feedback"></div>
+
+                        </div>
                 </div>
 
                 <div class="col-6">
-                    <input type="text" placeholder="Escolaridade" class="form-control">
+                    <input type="text" placeholder="Area de Escolaridade / (Curso Superior ou Técnico)" class="form-control">
                 </div>
             </div>
 
@@ -184,30 +352,34 @@
 
                     <div class="col-6">
                         <h4>Nome da Instituição</h4>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control step-2-instituicao" required>
+                        <div class="feedback"></div>
                     </div>
                     <div class="col-4">
                         <h4>Tipo</h4>
                         <div class="fs-5">
                             <span> Pública</span>
-                            <input type="checkbox" class="form-check-input"
-                                aria-label="Checkbox for following text input">
+                            <input type="radio" class="form-check-input" required
+                                aria-label="radio for following text input" name="tipoInstituicao">
                             <span> Privada </span>
-                            <input type="checkbox" class="form-check-input"
-                                aria-label="Checkbox for following text input">
+                            <input type="radio" class="form-check-input" required name="tipoInstituicao"
+                                aria-label="radio for following text input">
+                            <div id="feedback-tipoInstituicao" class="text-danger"></div>
                         </div>
+                        <div id="feedback-tipoInstituicao" class="text-danger"></div>
                     </div>
                 </div>
 
                 <div class="mt-3">
                     <h4>Experiência</h4>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Selecione o tempo de experiência</option>
+                    <select class="form-select" aria-label="Default select example" required>
+                        <option selected value="">Selecione o tempo de experiência</option>
                         <option value="1">Nunca programou</option>
                         <option value="2">Até 1 ano de experiência com programação</option>
                         <option value="3">Até 2 ano de experiência com programação</option>
-                        <option value="4">Ensino Fundamental Completo</option>
+                        <option value="4">Mais de 2 anos</option>
                     </select>
+                    <div class="feedback"></div>
                 </div>
 
 
@@ -218,15 +390,17 @@
                             <h4>Disponibilidade</h4>
                             <div class="fs-5">
                                 <span> Matutino</span>
-                                <input type="checkbox" class="form-check-input m-2"
-                                    aria-label="Checkbox for following text input">
+                                <input type="radio" class="form-check-input m-2"
+                                    aria-label="Checkbox for following text input" required name="disponibilidade">
                                 <span> Vespertino </span>
-                                <input type="checkbox" class="form-check-input m-2 "
-                                    aria-label="Checkbox for following text input">
+                                <input type="radio" class="form-check-input m-2 "
+                                    aria-label="Checkbox for following text input" required name="disponibilidade">
                                 <span> Noturno </span>
-                                <input type="checkbox" class="form-check-input m-2"
-                                    aria-label="Checkbox for following text input">
+                                <input type="radio" class="form-check-input m-2"
+                                    aria-label="Checkbox for following text input" required name="disponibilidade">
                             </div>
+                            <div id="feedback-disponibilidade" class="text-danger"></div>
+
                         </div>
                     </div>
 
@@ -234,14 +408,15 @@
 
                         <div class="">
                             <h4>Área de Interesse</h4>
+                            <form class="step3" action=""></form>
                             <div class="fs-5 row  justify-content-center align-items-center">
                                 <div class="col-2">
                                     <div>
                                         <img class="icon" src="icons/backend.svg" alt="Ícone">
                                     </div>
                                     <span> Backend</span>
-                                    <input type="checkbox" class="form-check-input "
-                                        aria-label="Checkbox for following text input">
+                                    <input type="radio" class="form-check-input "
+                                        aria-label="radio for following text input" name="area">
                                 </div>
                                 <div class="col-3">
                                     <div>
@@ -249,8 +424,8 @@
                                     </div>
 
                                     <span> FrontEnd </span>
-                                    <input type="checkbox" class="form-check-input "
-                                        aria-label="Checkbox for following text input">
+                                    <input type="radio" class="form-check-input "
+                                        aria-label="radio for following text input" name="area">
                                 </div>
 
                                 <div class="col-2">
@@ -259,8 +434,8 @@
                                     </div>
 
                                     <span> Jogos </span>
-                                    <input type="checkbox" class="form-check-input "
-                                        aria-label="Checkbox for following text input">
+                                    <input type="radio" class="form-check-input "
+                                        aria-label="radio for following text input" name="area">
                                 </div>
 
                                 <div class="col-2">
@@ -269,8 +444,8 @@
                                     </div>
 
                                     <span> Dados </span>
-                                    <input type="checkbox" class="form-check-input "
-                                        aria-label="Checkbox for following text input">
+                                    <input type="radio" class="form-check-input "
+                                        aria-label="radio for following text input" name="area">
                                 </div>
 
                                 <div class="col-2">
@@ -279,17 +454,19 @@
                                     </div>
 
                                     <span> Ux </span>
-                                    <input type="checkbox" class="form-check-input "
-                                        aria-label="Checkbox for following text input">
+                                    <input type="radio" class="form-check-input "
+                                        aria-label="radio for following text input" name="area">
                                 </div>
 
                             </div>
+                            <div id="feedback-area" class="text-danger"></div>
+
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-between mt-4">
-                        <button class="prev btn btn-danger p-3">Voltar</button>
-                        <button class="next btn btn-primary p-3">Próximo</button>
+                        <button type="button" class="prev btn btn-danger p-3">Voltar</button>
+                        <button type="button" class="next btn btn-primary p-3 step2">Próximo</button>
                     </div>
                 </div>
 
@@ -302,32 +479,37 @@
             <div>
             <span class="h4"> RG/CPF</span>
             <input type="file" class="form-control mb-4  form-control-lg" accept="application/pdf">
+            <div class="feedback"></div>
             </div>
             
             <div>
             <span class="h4"> Documentos de Escolaridade</span>
             <input type="file" class="form-control mb-4  form-control-lg" accept="application/pdf">
+            <div class="feedback"></div>
             </div>
             <div>
             <span class="h4"> Comprovante de Residência</span>
             <input type="file" class="form-control mb-4  form-control-lg" accept="application/pdf">
+            <div class="feedback"></div>
             </div>
 
             <div>
                 <span class="h4"> Declarações</span>
                 <input type="file" class="form-control mb-4  form-control-lg" accept="application/pdf">
+                <div class="feedback"></div>
             </div>
             
 
             <div class="d-flex justify-content-between mt-4">
-                <button class="prev btn btn-danger p-3">Voltar</button>
-                <button class="next btn btn-primary p-3">Próximo</button>
+                <button type="button" class="prev btn btn-danger p-3">Voltar</button>
+                <button  type="button" class="next btn btn-primary p-3 step3">Próximo</button>
 
             </div>
         </div>
 
         <!-- Step 3 -->
         <div class="step d-none">
+
             <h3 class="">Declarações</h3>
             <p>Faça um breve resumo sobre sua experiência com tecnologia e nos informe por que você deveria ser
                 selecionado para o programa.</p>
@@ -338,14 +520,15 @@
                         Condições</a> e a <a href="#">Política de Privacidade</a>.</label>
             </div>
             <div class="d-flex justify-content-between mt-4">
-                <button class="prev btn btn-danger p-3">Voltar</button>
-                <button class="btn btn-success p-3">Enviar</button>
+                <button type="button" class="prev btn btn-danger p-3">Voltar</button>
+                <button type="submit" class="btn btn-success p-3 form-full step4">Enviar</button>
 
             </div>
+        </form>
         </div>
 
-       
-
+        
+        
 
 </body>
 
