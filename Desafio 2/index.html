@@ -17,13 +17,20 @@
             background-color: lightgray;
         }
 
-        body{
+        body {
             background: linear-gradient(to right, #895BC4, #2135A6);
-            
+
         }
-        input{
+
+        input {
             border-radius: 20;
         }
+
+        .icons {
+            max-width: 15pt;
+            max-height: 15pt;
+        }
+
         .indicator.active {
             background-color: orange;
         }
@@ -67,7 +74,7 @@
 </head>
 
 <body class="d-flex justify-content-center align-items-center vh-100">
-    <div class="bg-white p-4 rounded shadow w-100" style="max-width: 1000px; max-heigth: 1000px">
+    <div class="bg-white p-4 rounded shadow" style="min-width: 1000px; min-heigth: 1000px">
         <div class="d-flex justify-content-center mb-3">
             <div class="indicator me-2"></div>
             <div class="indicator me-2"></div>
@@ -77,121 +84,269 @@
 
         <!-- Step 1 -->
         <div class="step container">
-            <h4 >Dados do Usuário</h4>
+            <h4>Dados do Usuário</h4>
             <input type="text" placeholder="Nome Completo" class="form-control mb-2">
             <div class="row">
                 <div class="col-6 ">
-                    <input type="text" placeholder="CPF ou RG" class="form-control mb-2">
+                    <input type="text" placeholder="CPF ou RG" class="form-control mt-3">
                 </div>
                 <div class="col-6 ">
-                    <input type="text" placeholder="Telefone" class="form-control mb-2">
+                    <input type="text" placeholder="Telefone" class="form-control mt-3">
                 </div>
             </div>
 
-            <div class="row justify-content-between">
+            <div class="row mt-4 justify-content-between">
                 <div class="col-2">
                     <h4>Sexo</h4>
                     <div class="">
                         <span> M </span>
-                        <input type="checkbox" aria-label="Checkbox for following text input">
+                        <input type="checkbox" class="form-check-input" aria-label="Checkbox for following text input">
                         <span> F </span>
-                        <input type="checkbox" aria-label="Checkbox for following text input">  
+                        <input type="checkbox" class="form-check-input" aria-label="Checkbox for following text input">
                     </div>
                 </div>
 
                 <div class="col-2">
                     <h4>Nascimento</h4>
-                    <input type="date"  class="form-control">
+                    <input type="date" class="form-control">
                 </div>
 
                 <div class="col-2">
                     <h4>Cep</h4>
-                    <input type="text"  class="form-control">
+                    <input type="text" class="form-control">
                 </div>
 
                 <div class="col-1">
                     <h4>UF</h4>
-                    <input type="text"  class="form-control">
+                    <input type="text" class="form-control">
                 </div>
             </div>
-            <div class="row">
+            <div class="row  mt-4">
                 <div class="col-6 ">
-                <h4>Cidade</h4>
-                    <input type="text"  class="form-control mb-2">
+                    <h4>Cidade</h4>
+                    <input type="text" class="form-control mb-2">
                 </div>
                 <div class="col-6 ">
                     <h4>Logradouro</h4>
-                    <input type="text"  class="form-control mb-2">
+                    <input type="text" class="form-control mb-2">
                 </div>
             </div>
-            <div class="row">
+            <div class="row  mt-4">
                 <div class="col-6 ">
-                <h4>Bairro</h4>
-                    <input type="text"  class="form-control mb-2">
+                    <h4>Bairro</h4>
+                    <input type="text" class="form-control mb-2">
                 </div>
                 <div class="col-6 ">
                     <h4>Email</h4>
-                    <input type="email"  class="form-control mb-2">
+                    <input type="email" class="form-control mb-2">
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row  mt-4">
                 <div class="col-6 ">
-                <h4>Senha</h4>
-                    <input type="password"  class="form-control mb-2">
+                    <h4>Senha</h4>
+                    <input type="password" class="form-control mb-2">
                 </div>
                 <div class="col-6 ">
                     <h4>Confirmação de Senha</h4>
-                    <input type="password"  class="form-control mb-2">
+                    <input type="password" class="form-control mb-2">
                 </div>
             </div>
-            <div class="d-flex justify-content-between">
-                <button class="prev btn btn-danger d-none">Voltar</button>
-                <button class="next btn btn-primary">Próximo</button>
+            <div class="d-flex justify-content-between mt-4">
+                <button class="prev btn btn-danger d-none p-3">Voltar</button>
+                <button class="next btn btn-primary p-3">Próximo</button>
             </div>
         </div>
 
         <!-- Step 2 -->
         <div class="step d-none">
-            <h2 class="h5 mb-3">Dados Adicionais</h2>
-            <input type="text" placeholder="Escolaridade" class="form-control mb-2">
-            <input type="text" placeholder="Formação" class="form-control mb-2">
-            <input type="text" placeholder="Nome da Instituição" class="form-control mb-2">
-            <div class="d-flex justify-content-between">
-                <button class="prev btn btn-danger">Voltar</button>
-                <button class="next btn btn-primary">Próximo</button>
+            <h3>Dados Adicionais</h3>
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Selecione a Escolaridade</option>
+                            <option value="1">Ensino Médio Completo</option>
+                            <option value="2">Ensino Médio Incompleto</option>
+                            <option value="3">Ensino Superior Incompleto</option>
+                            <option value="4">Ensino Fundamental Completo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <input type="text" placeholder="Escolaridade" class="form-control">
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <div class="row mt-4 justify-content-between">
+
+                    <div class="col-6">
+                        <h4>Nome da Instituição</h4>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-4">
+                        <h4>Tipo</h4>
+                        <div class="fs-5">
+                            <span> Pública</span>
+                            <input type="checkbox" class="form-check-input"
+                                aria-label="Checkbox for following text input">
+                            <span> Privada </span>
+                            <input type="checkbox" class="form-check-input"
+                                aria-label="Checkbox for following text input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <h4>Experiência</h4>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Selecione o tempo de experiência</option>
+                        <option value="1">Nunca programou</option>
+                        <option value="2">Até 1 ano de experiência com programação</option>
+                        <option value="3">Até 2 ano de experiência com programação</option>
+                        <option value="4">Ensino Fundamental Completo</option>
+                    </select>
+                </div>
+
+
+                <div class="mt-3">
+                    <div class="row mt-4 justify-content-between">
+
+                        <div class="">
+                            <h4>Disponibilidade</h4>
+                            <div class="fs-5">
+                                <span> Matutino</span>
+                                <input type="checkbox" class="form-check-input m-2"
+                                    aria-label="Checkbox for following text input">
+                                <span> Vespertino </span>
+                                <input type="checkbox" class="form-check-input m-2 "
+                                    aria-label="Checkbox for following text input">
+                                <span> Noturno </span>
+                                <input type="checkbox" class="form-check-input m-2"
+                                    aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+
+                        <div class="">
+                            <h4>Área de Interesse</h4>
+                            <div class="fs-5 row  justify-content-center align-items-center">
+                                <div class="col-2">
+                                    <div>
+                                        <img class="icon" src="icons/backend.svg" alt="Ícone">
+                                    </div>
+                                    <span> Backend</span>
+                                    <input type="checkbox" class="form-check-input "
+                                        aria-label="Checkbox for following text input">
+                                </div>
+                                <div class="col-3">
+                                    <div>
+                                        <img class="icon" src="icons/frontend.svg" alt="Ícone">
+                                    </div>
+
+                                    <span> FrontEnd </span>
+                                    <input type="checkbox" class="form-check-input "
+                                        aria-label="Checkbox for following text input">
+                                </div>
+
+                                <div class="col-2">
+                                    <div>
+                                        <img class="icon" src="icons/jogos.svg" alt="Ícone">
+                                    </div>
+
+                                    <span> Jogos </span>
+                                    <input type="checkbox" class="form-check-input "
+                                        aria-label="Checkbox for following text input">
+                                </div>
+
+                                <div class="col-2">
+                                    <div>
+                                        <img class="icon" src="icons/dados.svg" alt="Ícone">
+                                    </div>
+
+                                    <span> Dados </span>
+                                    <input type="checkbox" class="form-check-input "
+                                        aria-label="Checkbox for following text input">
+                                </div>
+
+                                <div class="col-2">
+                                    <div>
+                                        <img class="icon" src="icons/ux.svg" alt="Ícone">
+                                    </div>
+
+                                    <span> Ux </span>
+                                    <input type="checkbox" class="form-check-input "
+                                        aria-label="Checkbox for following text input">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="prev btn btn-danger p-3">Voltar</button>
+                        <button class="next btn btn-primary p-3">Próximo</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+         <!-- Step 4 -->
+        <div class="step d-none">
+            <h3 class="mb-4">Anexe os Documentos</h3>
+            <div>
+            <span class="h4"> RG/CPF</span>
+            <input type="file" class="form-control mb-4  form-control-lg" accept="application/pdf">
+            </div>
+            
+            <div>
+            <span class="h4"> Documentos de Escolaridade</span>
+            <input type="file" class="form-control mb-4  form-control-lg" accept="application/pdf">
+            </div>
+            <div>
+            <span class="h4"> Comprovante de Residência</span>
+            <input type="file" class="form-control mb-4  form-control-lg" accept="application/pdf">
+            </div>
+
+            <div>
+                <span class="h4"> Declarações</span>
+                <input type="file" class="form-control mb-4  form-control-lg" accept="application/pdf">
+            </div>
+            
+
+            <div class="d-flex justify-content-between mt-4">
+                <button class="prev btn btn-danger p-3">Voltar</button>
+                <button class="next btn btn-primary p-3">Próximo</button>
+
             </div>
         </div>
 
         <!-- Step 3 -->
         <div class="step d-none">
-            <h2 class="h5 mb-3">Declarações</h2>
+            <h3 class="">Declarações</h3>
             <p>Faça um breve resumo sobre sua experiência com tecnologia e nos informe por que você deveria ser
                 selecionado para o programa.</p>
-            <textarea class="form-control mb-2" rows="3"></textarea>
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="terms">
+            <textarea class="form-control mb-2" rows="10"></textarea>
+            <div class="form-check mb-4 p-4">
+                <input class="form-check-input form-check-input" type="checkbox" id="terms">
                 <label class="form-check-label" for="terms">Declaro que li e concordo com os <a href="#">Termos e
                         Condições</a> e a <a href="#">Política de Privacidade</a>.</label>
             </div>
-            <div class="d-flex justify-content-between">
-                <button class="prev btn btn-danger">Voltar</button>
-                <button class="next btn btn-primary">Próximo</button>
+            <div class="d-flex justify-content-between mt-4">
+                <button class="prev btn btn-danger p-3">Voltar</button>
+                <button class="btn btn-success p-3">Enviar</button>
+
             </div>
         </div>
 
-        <!-- Step 4 -->
-        <div class="step d-none">
-            <h2 class="h5 mb-3">Anexe os Documentos</h2>
-            <input type="file" class="form-control mb-2" accept="application/pdf">
-            <input type="file" class="form-control mb-2" accept="application/pdf">
-            <input type="file" class="form-control mb-2" accept="application/pdf">
-            <div class="d-flex justify-content-between">
-                <button class="prev btn btn-danger">Voltar</button>
-                <button class="btn btn-success">Enviar</button>
-            </div>
-        </div>
-    </div>
+       
+
+
 </body>
 
 </html>
