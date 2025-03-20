@@ -38,13 +38,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.querySelectorAll(".next").forEach(button => {
                 button.addEventListener("click", function (event) {
-                    if(button.classList.contains("form-full")){
-                        window.alert("Formulário enviado com sucesso!");
-                    }
-                    event.preventDefault();
+                    
                 if (!ValidadeAllInputsFromStep(currentStep, event.currentTarget)) {
                     return; // Se houver erro, interrompe o avanço
                 }
+                if(button.classList.contains("form-full")){
+                    window.alert("Formulário enviado com sucesso!");
+                    window.location.href = "fim-inscricao.html";
+                }
+                // event.preventDefault();
                 if (currentStep < steps.length) {
                         currentStep++;
                         showStep(currentStep);
@@ -191,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     
                 }
             }
-
+          
 
             document.querySelectorAll(".prev").forEach(button => {
                 button.addEventListener("click", function () {
@@ -200,8 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         showStep(currentStep);
                     }
                 });
-            });
-          
-
+            });          
             showStep(currentStep);
         });

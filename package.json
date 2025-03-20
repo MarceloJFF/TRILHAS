@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/MarceloJFF/TRILHAS-/issues"
   },
-  "homepage": "https://github.com/MarceloJFF/TRILHAS-#readme"
+  "homepage": "https://github.com/MarceloJFF/TRILHAS-#readme",
+  "dependencies": {
+    "trilhas-": "file:"
+  }
 }
