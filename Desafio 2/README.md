@@ -82,5 +82,7 @@ O status da inscrição é atualizado no sistema (aprovado/reprovado/em análise
 - Orientações para os aprovados sobre próximos passos.
 - Disponibilização de um canal de suporte para dúvidas.
 
-
+Tecnologias utilizadas
+- Bootstrap
+- Javascript vanilla
 
