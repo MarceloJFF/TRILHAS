@@ -82,6 +82,7 @@ O status da inscrição é atualizado no sistema (aprovado/reprovado/em análise
 - Orientações para os aprovados sobre próximos passos.
 - Disponibilização de um canal de suporte para dúvidas.
 
+Protótipo disponível em https://www.figma.com/design/LprqjLP0nUihCw96RS2XYi/trilhas?node-id=0-1&p=f&t=t1CaXFnb7aRCHapw-0
 Tecnologias utilizadas
 - Bootstrap
 - Javascript vanilla
