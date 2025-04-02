@@ -1,0 +1,36 @@
+/* ---------------------------------------------------------Reset simples-------------------------------------------------------- */
+*{
+    margin:0;
+    padding: 0;
+}
+/* -----------------------------------------------------Definindo cores globais-------------------------------------------------- */
+:root {
+    --indicadorDePágina: #E74923;
+    --paginaAtual: #742B26;
+}
+/* -------------------------------------------------------Estlização da página--------------------------------------------------- */
+body {
+    background-image: url(../assets/icons/circuit.jpg);
+    background-size: cover;
+}
+
+.indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--indicadorDePágina);
+}
+
+.indicator.active {
+    background-color: var(--paginaAtual);
+}
+
+input {
+    border-radius: 20;
+}
+
+.icons {
+    max-width: 15pt;
+    max-height: 15pt;
+}
+

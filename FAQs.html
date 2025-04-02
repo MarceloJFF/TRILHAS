@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="scripts/header.js" defer></script>
+
+  <link rel="icon" type="image/png" href="assets/icons/favicon.ico" />
+  <title>Perguntas Frequentes</title>
+</head>
+
+<body>
+  <div class="container">
+    <header
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="home.html" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <img src="assets/icons/logo-light.png" class="m-4" width="250" height="32"/>
+        </a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li>
+          <a href="home.html" class="button-home mx-1 nav-link px-2 link-secondary nav-button">Página Inicial</a>
+        </li>
+        <li>
+          <a href="regulation.html" class="button-regulation mx-1 nav-link px-2 nav-button">Regulamento</a>
+        </li>
+        <li>
+          <a href="FAQs.html" class="button-faqs mx-1 nav-link px-2 nav-button">FAQs</a>
+        </li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <button class="btn btn-outline-primary me-2" onclick="location.href='login.html'">
+          Entrar
+        </button>
+        <button class="btn btn-primary" onclick="location.href='main.html'">
+          Inscreva-se
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <section class="col-12">
+    <div class="accordion" id="faqTrilhas">
+      <h1>Perguntas Frequentes</h1>
+
+      <!-- Pergunta 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta1">
+            1. Quem pode se inscrever no Trilhas Inova?
+          </button>
+        </h2>
+        <div id="resposta1" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            Residentes do Maranhão a partir de 16 anos que:<br />
+            - Estejam cursando/concluíram o ensino médio em escola pública ou
+            como bolsista integral;<br />
+            - Tenham acesso a computador com internet;<br />
+            - Disponibilidade de 8h semanais.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta2">
+            2. Quais trilhas (cursos) estão disponíveis?
+          </button>
+        </h2>
+        <div id="resposta2" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            Programação Front-End, Back-End, Jogos, Design/UX, Análise de
+            Dados + Trilha de Carreiras.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 3 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta3">
+            3. Qual a duração do programa?
+          </button>
+        </h2>
+        <div id="resposta3" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            20 semanas (5 meses), com carga horária total de 400 horas.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 4 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta4">
+            4. Preciso ter conhecimento prévio em tecnologia?
+          </button>
+        </h2>
+        <div id="resposta4" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            Não! O programa é destinado a iniciantes, com foco em formação
+            básica.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 5 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta5">
+            5. Quais documentos preciso para inscrição?
+          </button>
+        </h2>
+        <div id="resposta5" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            - RG e CPF;<br />
+            - Comprovante de residência no MA;<br />
+            - Declaração/comprovante de vínculo com ensino médio (público,
+            bolsa 100% ou sem fins lucrativos);<br />
+            - Declaração de equipamento e disponibilidade (Anexo II).
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 6 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta6">
+            6. O programa é totalmente online?
+          </button>
+        </h2>
+        <div id="resposta6" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            Sim! Aulas remotas via plataforma online + encontros semanais por
+            videoconferência.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 7 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta7">
+            7. Há algum custo para participar?
+          </button>
+        </h2>
+        <div id="resposta7" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            Não! O programa é 100% gratuito, incluindo certificação.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 8 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta8">
+            8. Como funciona a certificação?
+          </button>
+        </h2>
+        <div id="resposta8" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            Ao concluir as trilhas e atividades, você receberá:<br />
+            - Certificado de cada curso concluído;<br />
+            - Certificado geral de 400 horas.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 9 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta9">
+            9. Posso me inscrever se já participei de edições anteriores?
+          </button>
+        </h2>
+        <div id="resposta9" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            Não. O programa é exclusivo para novos participantes.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pergunta 10 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#resposta10">
+            10. Onde encontro o edital completo?
+          </button>
+        </h2>
+        <div id="resposta10" class="accordion-collapse collapse" data-bs-parent="#faqTrilhas">
+          <div class="accordion-body ms-4">
+            <a href="https://secti.ma.gov.br/uploads/secti/docs/EDITAL_SECTI_FAPEMA_N%C2%BA_07_2024_%E2%80%93_TRILHAS_2B.pdf"
+              target="_blank">Clique aqui para acessar o edital oficial</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="app__footer m-auto">
+    <p class="app__footer-text">
+      Projeto fictício e sem fins comerciais. Imagens adquiridas na internet.
+      Desenvolvido para o projeto do Trilhas 2B.
+    </p>
+  </footer>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f5f5f5;
+    }
+
+    .accordion-collapse,
+    .accordion-button {
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      color: #2c3e50;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .nav-button {
+      border-radius: 0.3rem;
+    }
+
+    .nav-button:hover {
+      background-color: #ededed;
+    }
+
+    .app__footer {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .app__footer-text {
+      margin: 0;
+      color: #6c757d;
+    }
+
+    @keyframes animation {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(1.05);
+      }
+    }
+
+    .btn:hover {
+      animation-name: animation;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+  </style>
+</body>
+
+</html>
