@@ -31,6 +31,16 @@ function validacaoInputsVazio(input, feedback, isValid) {
     return isValid;
 }
 
+function getRadioLabelText(name) {
+  const selected = document.querySelector(`input[name="${name}"]:checked`);
+  if (selected) {
+    const label = document.querySelector(`label[for="${selected.id}"] > span`);
+    return label?.innerText || '';
+  }
+  return '';
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 1;
     const steps = document.querySelectorAll(".step");
@@ -48,13 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!ValidadeAllInputsFromStep(currentStep, event.currentTarget)) {
                 return; // Se houver erro, interrompe o avanço
             }
+          
             if (button.classList.contains("form-full")) {
-
                 const inscrito = {
                 nome: document.querySelector(".step-1-nome").value,
                 cpf: document.querySelector(".step-1-cpf").value,
                 telefone: document.querySelector(".step-1-telefone").value,
-                sexo: document.querySelector("input[name='sexo']:checked")?.value,
+                sexo: getRadioLabelText("sexo"),
                 nascimento: document.querySelector(".step-1-nascimento").value,
                 cep: document.querySelector(".step-1-cep").value,
                 uf: document.querySelector(".step-1-uf").value,
@@ -63,16 +73,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 idUsuario: document.querySelector(".step-1-id-usuario").value,
                 password: document.querySelector(".step-1-password").value,
                 confirmPassword: document.querySelector(".step-1-confirm-password").value,
-                endereco: document.querySelector(".step-1-endereco").value,
-                complemento: document.querySelector(".step-1-complemento").value,                
+                logradouro: document.querySelector(".step-1-logradouro").value,
                 email: document.querySelector(".step-1-email").value,
-                
                 instituicao: document.querySelector(".step-2-instituicao").value,
-                tipoInstituicao: document.querySelector("input[name='tipoInstituicao']:checked")?.value,
-                disponibilidade: document.querySelector("input[name='disponibilidade']:checked")?.value,
-                area: document.querySelector("input[name='area']:checked")?.value
+                escolaridadeSelecionada: document.querySelector(".step-2-escolaridade").options[document.querySelector(".step-2-escolaridade").selectedIndex].text,
+                experiencia: document.querySelector(".step-2-experiencia").options[document.querySelector(".step-2-experiencia").selectedIndex].text,
+                areaEscolaridade: document.querySelector(".step-2-area-escolaridade").value,
+                tipoInstituicao: getRadioLabelText("tipoInstituicao"),
+                disponibilidade: getRadioLabelText("disponibilidade"),
+                area: getRadioLabelText("area"),
+                fileCpf: document.querySelector(".step-3-files-cpf").files[0],
+                fileEscolaridade: document.querySelector(".step-3-files-escolaridade").files[0],
+                fileResidencia: document.querySelector(".step-3-files-residencia").files[0],
+                fileDeclaracoes: document.querySelector(".step-3-files-declaracoes").files[0],
+                boxAceite: document.querySelector(".step-4-aceite").checked,
                 // Você pode incluir mais campos se quiser
-            };
+                };
+                
 
             // Pega os inscritos existentes ou inicializa um novo array
             let inscritos = JSON.parse(localStorage.getItem("inscritos")) || [];

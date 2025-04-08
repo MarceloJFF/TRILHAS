@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumo da Inscrição</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="scripts/main.js" defer> </script>
+
+  <style>
+    .resumo-container {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 30px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    .resumo-container h2 {
+      margin-bottom: 20px;
+    }
+    .resumo-container .info {
+      margin-bottom: 10px;
+    }
+    .badge-status {
+      font-size: 1rem;
+      padding: 0.5em 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container resumo-container">
+    <h2 class="text-center">Resumo da Inscrição</h2>
+    
+    <div id="resumoDados">
+      <!-- Dados vão ser inseridos aqui pelo JS -->
+    </div>
+
+    <div class="text-center mt-4">
+      <span class="badge badge-primary badge-status" id="statusInscricao">Aguardando validação</span>
+    </div>
+  </div>
+
+ <script>
+  // Lê o array de inscritos do localStorage
+  const inscritos = JSON.parse(localStorage.getItem('usuarioLogado')) || [];
+  // Pega o primeiro inscrito do array
+  const dados = inscritos;
+
+  function mostrarResumo(dados) {
+    const container = document.getElementById('resumoDados');
+    container.innerHTML = `
+      <div class="info"><strong>Nome:</strong> ${dados.nome || '-'}</div>
+      <div class="info"><strong>CPF:</strong> ${dados.cpf || '-'}</div>
+      <div class="info"><strong>Telefone:</strong> ${dados.telefone || '-'}</div>
+      <div class="info"><strong>Sexo:</strong> ${dados.sexo || '-'}</div>
+      <div class="info"><strong>Data de Nascimento:</strong> ${dados.nascimento || '-'}</div>
+      <div class="info"><strong>Email:</strong> ${dados.email || '-'}</div>
+      <div class="info"><strong>Instituição:</strong> ${dados.instituicao || '-'}</div>
+      <div class="info"><strong>Tipo de Instituição:</strong> ${dados.tipoInstituicao || '-'}</div>
+      <div class="info"><strong>Área de Interesse:</strong> ${dados.area || '-'}</div>
+      <div class="info"><strong>Disponibilidade:</strong> ${dados.disponibilidade || '-'}</div>
+      <div class="info"><strong>Escolaridade:</strong> ${dados.escolaridadeSelecionada || '-'}</div>
+      <div class="info"><strong>Área da Escolaridade:</strong> ${dados.areaEscolaridade || '-'}</div>
+      <div class="info"><strong>Experiência:</strong> ${dados.experiencia || '-'}</div>
+      <div class="info"><strong>CEP:</strong> ${dados.cep || '-'}</div>
+      <div class="info"><strong>UF:</strong> ${dados.uf || '-'}</div>
+      <div class="info"><strong>Cidade:</strong> ${dados.cidade || '-'}</div>
+      <div class="info"><strong>Bairro:</strong> ${dados.bairro || '-'}</div>
+      <div class="info"><strong>Logradouro:</strong> ${dados.logradouro || '-'}</div>
+      <div class="info"><strong>ID do Usuário:</strong> ${dados.idUsuario || '-'}</div>
+    `;
+
+    const status = dados.statusInscricao || "Aguardando validação";
+    const badge = document.getElementById('statusInscricao');
+    badge.textContent = status;
+
+    // Ajusta a cor do badge conforme status
+    badge.classList.remove("badge-primary", "badge-success", "badge-danger");
+
+    if (status === "Inscrição confirmada") {
+      badge.classList.add("badge-success");
+    } else if (status === "Rejeitada") {
+      badge.classList.add("badge-danger");
+    } else {
+      badge.classList.add("badge-primary");
+    }
+  }
+
+  mostrarResumo(dados);
+</script>
+
+</body>
+</html>

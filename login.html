@@ -12,15 +12,15 @@
 </head>
 <body class="d-flex align-items-center py-4 h-100">
     <main class="w-100 m-auto form-container">
-        <form>
+        <form class="form-signin" method="POST">
             <img src="assets/icons/logo-light.png" class="m-4" width="250" height="32"/> 
             <h1 class="h3 mb-3 fw-normal">Faça login para continuar</h1>
             <div class="form-floating mb-1">
-                <input type="email" class="form-control" id="floatingInput" placeholder="seu-email@gmail.com"/>
+                <input type="text" class="form-control" id="floatingInput"/>
                 <label for=floatingInput>E-mail</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingInput" placeholder="Digite sua senha"/>
+                <input type="password" class="form-control password" id="floatingInput" placeholder="Digite sua senha"/>
                 <label for=floatingInput>Senha</label>
             </div>
             <div class="form-check text-start my-3">
@@ -29,7 +29,7 @@
                         
             </div>
             <p>Não tem conta? <a href="main.html">Registre-se</a> agora.</p>
-            <button class="btn btn-primary w-100 py-2">Entrar</button>
+            <button type="submit" class="btn btn-primary w-100 py-2">Entrar</button>
         </form>
     </main>
     
@@ -43,5 +43,29 @@
         text-decoration: none;
     }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.form-signin');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                // Aqui você pode adicionar a lógica para autenticar o usuário
+                let username = document.querySelector('#floatingInput').value.trim();
+                let password = document.querySelector('.password').value.trim();
+                const inscritos = JSON.parse(localStorage.getItem('inscritos')) || [];
+                // Pega o primeiro inscrito do array
+                const usuario = inscritos.find(u => u.idUsuario == username && u.password == password);
+                console.log(username)
+                console.log(password)
+                if (usuario) {
+                    // Salva o usuário logado em outra chave para ser usado na página dados.html
+                    localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+                    window.location.href = 'dados.html';
+                } else {
+                    alert('Usuário ou senha incorretos!');
+                }
+
+            });
+        });
+    </script>
 </body>
 </html>
