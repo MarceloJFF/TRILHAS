@@ -48,7 +48,7 @@
                 <div class="row mt-4 justify-content-between">
                     <div class="col-2">
                         <h4>Sexo</h4>
-                        <div class="">
+                        <div>
                             <label for="sexoM">
                                 <span> M </span>
                                 <input type="radio" id="sexoM" name="sexo" class="form-check-input"
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-6 ">
                         <h4>Logradouro</h4>
-                        <input type="text" class="form-control mb-2">
+                        <input type="text" class="form-control mb-2 step-1-logradouro" required >
                     </div>
                 </div>
                 <div class="row  mt-4">
@@ -104,6 +104,14 @@
                     <div class="col-6 ">
                         <h4>Email</h4>
                         <input type="email" class="form-control mb-2 step-1-email" required>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+
+                <div class="row-mt-4">
+                    <div class="col-6">
+                        <h4>Id Usuário</h4>
+                        <input type="text" class="form-control mb-2 step-1-id-usuario" required>
                         <div class="feedback"></div>
                     </div>
                 </div>
@@ -132,7 +140,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div>
-                            <select class="form-select" aria-label="Default select example" required>
+                            <select class="form-select step-2-escolaridade" aria-label="Default select example" required>
                                 <option selected value="">Selecione a Escolaridade</option>
                                 <option value="1">Ensino Fundamental Completo</option>
                                 <option value="2">Ensino Medio Cursando</option>
@@ -147,13 +155,12 @@
 
                     <div class="col-6">
                         <input type="text" placeholder="Area de Escolaridade / (Curso Superior ou Técnico)"
-                            class="form-control">
+                            class="form-control step-2-area-escolaridade">
                     </div>
                 </div>
 
                 <div class="mt-3">
                     <div class="row mt-4 justify-content-between">
-
                         <div class="col-6">
                             <h4>Nome da Instituição</h4>
                             <input type="text" class="form-control step-2-instituicao" required>
@@ -162,12 +169,17 @@
                         <div class="col-4">
                             <h4>Tipo</h4>
                             <div class="fs-5">
-                                <span> Pública</span>
-                                <input type="radio" class="form-check-input" required
+                                <label for="tipoInstituicaoPublica">
+                                    <span> Pública</span>
+                                    <input type="radio" id="tipoInstituicaoPublica" class="form-check-input" required
                                     aria-label="radio for following text input" name="tipoInstituicao">
-                                <span> Privada </span>
-                                <input type="radio" class="form-check-input" required name="tipoInstituicao"
-                                    aria-label="radio for following text input">
+                                </label>
+
+                                <label for="tipoInstituicaoPrivada">
+                                    <span> Privada </span>
+                                    <input type="radio" class="form-check-input" required name="tipoInstituicao"
+                                    aria-label="radio for following text input" id="tipoInstituicaoPrivada">
+                                </label>
                                 <div id="feedback-tipoInstituicao" class="text-danger"></div>
                             </div>
                             <div id="feedback-tipoInstituicao" class="text-danger"></div>
@@ -176,7 +188,7 @@
 
                     <div class="mt-3">
                         <h4>Experiência</h4>
-                        <select class="form-select" aria-label="Default select example" required>
+                        <select class="form-select step-2-experiencia" aria-label="Default select example" required>
                             <option selected value="">Selecione o tempo de experiência</option>
                             <option value="1">Nunca programou</option>
                             <option value="2">Até 1 ano de experiência com programação</option>
@@ -193,15 +205,23 @@
                             <div class="">
                                 <h4>Disponibilidade</h4>
                                 <div class="fs-5">
-                                    <span> Matutino</span>
-                                    <input type="radio" class="form-check-input m-2"
+                                    <label for="disponibilidadeMatutino">
+                                        <span> Matutino</span>
+                                        <input type="radio" class="form-check-input m-2" id="disponibilidadeMatutino"
                                         aria-label="Checkbox for following text input" required name="disponibilidade">
-                                    <span> Vespertino </span>
-                                    <input type="radio" class="form-check-input m-2 "
-                                        aria-label="Checkbox for following text input" required name="disponibilidade">
-                                    <span> Noturno </span>
-                                    <input type="radio" class="form-check-input m-2"
-                                        aria-label="Checkbox for following text input" required name="disponibilidade">
+                                    </label>
+
+                                    <label for="disponibilidadeVespertino">
+                                        <span> Vespertino </span>
+                                        <input type="radio" class="form-check-input m-2 "
+                                        aria-label="Checkbox for following text input" required name="disponibilidade" id="disponibilidadeVespertino">
+                                    </label>
+                                    
+                                    <label for="disponibilidadeNoturno">
+                                        <span> Noturno </span>
+                                        <input type="radio" class="form-check-input m-2"
+                                        aria-label="Checkbox for following text input" required name="disponibilidade" id="disponibilidadeNoturno">
+                                    </label>                
                                 </div>
                                 <div id="feedback-disponibilidade" class="text-danger"></div>
 
@@ -218,48 +238,58 @@
                                         <div>
                                             <img class="icon" src="assets/icons/backend.svg" alt="Ícone">
                                         </div>
-                                        <span> Backend</span>
-                                        <input type="radio" class="form-check-input "
+                                        <label for="idbackend">
+                                            <span> Backend</span>
+                                            <input type="radio" class="form-check-input" id="idbackend"
                                             aria-label="radio for following text input" name="area">
+                                        </label>
                                     </div>
                                     <div class="col-3">
                                         <div>
                                             <img class="icon" src="assets/icons/frontend.svg" alt="Ícone">
                                         </div>
-
-                                        <span> FrontEnd </span>
-                                        <input type="radio" class="form-check-input "
-                                            aria-label="radio for following text input" name="area">
+                                        <label for="idFrontend">
+                                            <span> FrontEnd </span>
+                                            <input type="radio" class="form-check-input "
+                                            aria-label="radio for following text input" name="area" id="idFrontend">
+                                        </label>
+                                        
                                     </div>
 
                                     <div class="col-2">
                                         <div>
                                             <img class="icon" src="assets/icons/jogos.svg" alt="Ícone">
                                         </div>
-
-                                        <span> Jogos </span>
-                                        <input type="radio" class="form-check-input "
-                                            aria-label="radio for following text input" name="area">
+                                        <label for="idJogos">
+                                            <span> Jogos </span>
+                                            <input type="radio" class="form-check-input "
+                                            aria-label="radio for following text input" name="area" id="idJogos">
+                                        </label>
+                                        
                                     </div>
 
                                     <div class="col-2">
                                         <div>
                                             <img class="icon" src="assets/icons/dados.svg" alt="Ícone">
                                         </div>
-
-                                        <span> Dados </span>
-                                        <input type="radio" class="form-check-input "
-                                            aria-label="radio for following text input" name="area">
+                                        <label for="idDados">
+                                            <span> Dados </span>
+                                            <input type="radio" class="form-check-input "
+                                            aria-label="radio for following text input" name="area" id="idDados">
+                                        </label>
+                                        
                                     </div>
 
                                     <div class="col-2">
                                         <div>
                                             <img class="icon" src="assets/icons/ux.svg" alt="Ícone">
                                         </div>
-
-                                        <span> Ux </span>
-                                        <input type="radio" class="form-check-input "
+                                        <label for="idUx">
+                                            <span> Ux </span>
+                                            <input type="radio" class="form-check-input "
                                             aria-label="radio for following text input" name="area">
+                                        </label>
+                                        
                                     </div>
 
                                 </div>
@@ -324,8 +354,8 @@
                     <input class="form-check-input form-check-input step-4-aceite
                 " type="checkbox" id="terms">
                     <label class="form-check-label" for="terms">Declaro que li e concordo com os <a
-                            href="https://secti.ma.gov.br/uploads/secti/docs/EDITAL_SECTI_FAPEMA_N%C2%BA_07_2024_%E2%80%93_TRILHAS_2B.pdf">Termos
-                            e Condições do edital do trilhas 2B</a> e a <a href="#">Política de Privacidade</a>.</label>
+                            href="https://secti.ma.gov.br/uploads/secti/docs/EDITAL_SECTI_FAPEMA_N%C2%BA_07_2024_%E2%80%93_TRILHAS_2B.pdf" target="_blank">Termos
+                            e Condições do edital do trilhas 2B</a>.</label>
                     <div class="feedback"></div>
 
                 </div>
@@ -335,10 +365,6 @@
                 </div>
         </form>
     </div>
-
-
-
-
 </body>
 
 </html>
