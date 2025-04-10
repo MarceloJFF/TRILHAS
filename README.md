@@ -13,4 +13,4 @@ Adicionado `LocalStorage` e uma tela de `Login` funcional para que o candidato v
 - `Vercel` Utilizado para por o projeto no ar e poder ser compartilhado.
 
 # 🛠️ Abrir e rodar o projeto
-Para abrir e rodar o projeto, basta abrir o aquivo *"home.html"* no navegador, abri-lo com a extensão Live Server do Visual Studio Code ou abri-lo a partir [deste link](https://sistema-de-inscricao-trilhas.vercel.app/).
+Para abrir e rodar o projeto, basta abrir o aquivo *"index.html"* no navegador, abri-lo com a extensão Live Server do Visual Studio Code ou abri-lo a partir [deste link](https://trilhas-sepia.vercel.app/).
