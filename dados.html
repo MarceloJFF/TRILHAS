@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
-  <title>Resumo da Inscrição</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="scripts/main.js" defer> </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <style>
-    .resumo-container {
-      max-width: 700px;
-      margin: 50px auto;
-      padding: 30px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-    .resumo-container h2 {
-      margin-bottom: 20px;
-    }
-    .resumo-container .info {
-      margin-bottom: 10px;
-    }
-    .badge-status {
-      font-size: 1rem;
-      padding: 0.5em 1em;
-    }
-  </style>
+  <link rel="icon" type="image/png" href="assets/icons/favicon.ico" />
+  <title>Resumo da Inscrição</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="scripts/main.js" defer> </script>
 </head>
+
 <body>
+  <div class="container">
+    <header
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="home.html" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <img src="assets/icons/logo-light.png" class="m-4" width="250" height="32" />
+        </a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li>
+          <a href="home.html" class="button-home mx-1 nav-link px-2 link-secondary nav-button">Página Inicial</a>
+        </li>
+        <li>
+          <a href="regulation.html" class="button-regulation mx-1 nav-link px-2 nav-button">Regulamento</a>
+        </li>
+        <li>
+          <a href="FAQs.html" class="button-faqs mx-1 nav-link px-2 nav-button">FAQs</a>
+        </li>
+      </ul>
+    </header>
+  </div>
+
   <div class="container resumo-container">
     <h2 class="text-center">Resumo da Inscrição</h2>
-    
+
     <div id="resumoDados">
       <!-- Dados vão ser inseridos aqui pelo JS -->
     </div>
@@ -39,15 +49,48 @@
     </div>
   </div>
 
- <script>
-  // Lê o array de inscritos do localStorage
-  const inscritos = JSON.parse(localStorage.getItem('usuarioLogado')) || [];
-  // Pega o primeiro inscrito do array
-  const dados = inscritos;
 
-  function mostrarResumo(dados) {
-    const container = document.getElementById('resumoDados');
-    container.innerHTML = `
+  <style>
+    body {
+      background-image: url(../assets/icons/circuit.jpg);
+      background-size: cover;
+    }
+
+    .resumo-container {
+      background-color: #f5f5f5;
+    }
+
+    .resumo-container {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 30px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .resumo-container h2 {
+      margin-bottom: 20px;
+    }
+
+    .resumo-container .info {
+      margin-bottom: 10px;
+    }
+
+    .badge-status {
+      font-size: 1rem;
+      padding: 0.5em 1em;
+    }
+  </style>
+
+  <script>
+    // Lê o array de inscritos do localStorage
+    const inscritos = JSON.parse(localStorage.getItem('usuarioLogado')) || [];
+    // Pega o primeiro inscrito do array
+    const dados = inscritos;
+
+    function mostrarResumo(dados) {
+      const container = document.getElementById('resumoDados');
+      container.innerHTML = `
       <div class="info"><strong>Nome:</strong> ${dados.nome || '-'}</div>
       <div class="info"><strong>CPF:</strong> ${dados.cpf || '-'}</div>
       <div class="info"><strong>Telefone:</strong> ${dados.telefone || '-'}</div>
@@ -69,24 +112,25 @@
       <div class="info"><strong>ID do Usuário:</strong> ${dados.idUsuario || '-'}</div>
     `;
 
-    const status = dados.statusInscricao || "Aguardando validação";
-    const badge = document.getElementById('statusInscricao');
-    badge.textContent = status;
+      const status = dados.statusInscricao || "Aguardando validação";
+      const badge = document.getElementById('statusInscricao');
+      badge.textContent = status;
 
-    // Ajusta a cor do badge conforme status
-    badge.classList.remove("badge-primary", "badge-success", "badge-danger");
+      // Ajusta a cor do badge conforme status
+      badge.classList.remove("badge-primary", "badge-success", "badge-danger");
 
-    if (status === "Inscrição confirmada") {
-      badge.classList.add("badge-success");
-    } else if (status === "Rejeitada") {
-      badge.classList.add("badge-danger");
-    } else {
-      badge.classList.add("badge-primary");
+      if (status === "Inscrição confirmada") {
+        badge.classList.add("badge-success");
+      } else if (status === "Rejeitada") {
+        badge.classList.add("badge-danger");
+      } else {
+        badge.classList.add("badge-primary");
+      }
     }
-  }
 
-  mostrarResumo(dados);
-</script>
+    mostrarResumo(dados);
+  </script>
 
 </body>
+
 </html>

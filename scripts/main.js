@@ -93,6 +93,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+function validacaoInputsVazio(input, feedback, isValid) {
+    if (input.value.trim() == "") {
+        input.classList.add("is-invalid");
+        input.classList.remove("is-valid");
+        if (feedback) feedback.textContent = "Este campo é obrigatório.";
+        isValid = false;
+    } else {
+        input.classList.remove("is-invalid");
+        input.classList.add("is-valid");
+    }
+    return isValid;
+}
+
+function getRadioLabelText(name) {
+    const selected = document.querySelector(`input[name="${name}"]:checked`);
+    if (selected) {
+        const label = document.querySelector(`label[for="${selected.id}"] > span`);
+        return label?.innerText || '';
+    }
+    return '';
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let currentStep = 1;
+    const steps = document.querySelectorAll(".step");
+    const indicators = document.querySelectorAll(".indicator");
     function showStep(step) {
         steps.forEach((s, index) => {
             s.classList.toggle("d-none", index + 1 !== step);
@@ -157,6 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
    
     let ValidadeAllInputsFromStep = (currentStep, btn) => {
+        let isValid = true;
         let isValid = true;
         if (btn.classList.contains("step1")) {
             const inputs = document.querySelectorAll(".step-1-cpf,.step-1-nome,.step-1-telefone, .step-1-nascimento, .step-1-cep, .step-1-uf, .step-1-cidade, .step-1-bairro, .step-1-email, .step-1-password, .step-1-confirm-password, .step-1-id-usuario");
@@ -241,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return isValid;
         } else if (btn.classList.contains("step3")) {
             const inputs = document.querySelectorAll(".step-3-files-cpf, .step-3-files-escolaridade, .step-3-files-residencia, .step-3-files-declaracoes");
+
 
             inputs.forEach((input) => {
                 const feedback = input.nextElementSibling; // Pega a div de feedback logo após o input
