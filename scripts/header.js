@@ -10,7 +10,7 @@ function removeClass() {
 
 const pagAtual = window.location.pathname.split('/').pop();
 switch (pagAtual) {
-    case "home.html":
+    case "index.html":
         removeClass()
         home.classList.add("border-bottom", "border-primary", "border-3");
         break;
