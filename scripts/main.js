@@ -1,3 +1,5 @@
+
+
 function validarRadio(name) {
     const radios = document.querySelectorAll(`input[name="${name}"]`);
     const feedback = document.querySelector(`#feedback-${name}`);
@@ -41,10 +43,56 @@ function getRadioLabelText(name) {
 }
 
 
+
+function preencherEndereco() {
+    let inputCep = document.querySelector(".step-1-cep");
+    inputCep.addEventListener("input", async () => {
+        const cep = inputCep.value.replace(/\D/g, ""); // remove qualquer caractere não numérico
+        if (cep.length >= 8) {
+            try {
+                const endereco = await mostrarEndereco(cep);
+                const uf = document.querySelector(".step-1-uf")
+                const cidade = document.querySelector(".step-1-cidade")
+                const bairro = document.querySelector(".step-1-bairro");
+                const logradouro = document.querySelector(".step-1-logradouro");
+                uf.value = endereco.uf;
+                cidade.value = endereco.localidade;
+                bairro.value = endereco.bairro;
+                logradouro.value = endereco.logradouro;
+                // Aqui você pode preencher outros campos, exemplo:
+                // document.querySelector("#logradouro").value = endereco.logradouro;
+            } catch (error) {
+                console.error("Erro ao buscar endereço:", error);
+            }
+        }
+    });
+}
+
+
+async function mostrarEndereco(cep) {
+    const url = `https://viacep.com.br/ws/${cep}/json/`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+        throw new Error("CEP não encontrado");
+    }
+
+    const data = await response.json();
+
+    if (data.erro) {
+        throw new Error("CEP inválido");
+    }
+
+    return data;
+}
 document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 1;
     const steps = document.querySelectorAll(".step");
     const indicators = document.querySelectorAll(".indicator");
+    preencherEndereco();
+
+
+
     function showStep(step) {
         steps.forEach((s, index) => {
             s.classList.toggle("d-none", index + 1 !== step);
@@ -87,30 +135,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 fileResidencia: document.querySelector(".step-3-files-residencia").files[0],
                 fileDeclaracoes: document.querySelector(".step-3-files-declaracoes").files[0],
                 boxAceite: document.querySelector(".step-4-aceite").checked,
-                // Você pode incluir mais campos se quiser
-                };
-                
-
-            // Pega os inscritos existentes ou inicializa um novo array
+                };   
             let inscritos = JSON.parse(localStorage.getItem("inscritos")) || [];
-
-            // Adiciona o novo inscrito
             inscritos.push(inscrito);
-
             // Salva novamente no localStorage
             localStorage.setItem("inscritos", JSON.stringify(inscritos));
-            console.log(inscritos);
+
             Swal.fire({
                 title: "Inscrição realizada com sucesso!",
                 text: "Agora é só aguardar, já pode fechar esta janela",
                 icon: "success"
             });
             }
-
             if (currentStep < steps.length) {
                 currentStep++;
                 showStep(currentStep);
             }
+            window.location.href = 'login.html';
+
         });
     });
    
@@ -220,7 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 input.classList.add("is-invalid");
                 input.classList.remove("is-valid");
                 feedback.textContent = "Por favor, ACEITE OS TERMOS";
-
                 isValid = false;
             } else {
                 input.classList.remove("is-invalid");
